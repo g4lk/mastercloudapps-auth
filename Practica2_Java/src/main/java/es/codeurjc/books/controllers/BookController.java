@@ -1,17 +1,5 @@
 package es.codeurjc.books.controllers;
 
-import java.util.Collection;
-
-import javax.validation.Valid;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import es.codeurjc.books.dtos.requests.BookRequestDto;
 import es.codeurjc.books.dtos.requests.CommentRequestDto;
 import es.codeurjc.books.dtos.responses.BookDetailsResponseDto;
@@ -26,6 +14,10 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/v1/books")
@@ -113,6 +105,21 @@ public class BookController {
                                             @Parameter(description = "id of comment to be deleted")
                                             @PathVariable long commentId) {
         return this.commentService.deleteComment(bookId, commentId);
+    }
+
+    @Operation(summary = "Delete a book")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Delete a book and its comments",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CommentResponseDto.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid format id supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Book not found with passed bookId",
+                    content = @Content)})
+    @DeleteMapping("/{bookId}")
+    public BookDetailsResponseDto deleteBook(@Parameter(description = "identifier of the book to which the comment belongs")
+                                             @PathVariable long bookId) {
+        return this.bookService.delete(bookId);
     }
 
 }

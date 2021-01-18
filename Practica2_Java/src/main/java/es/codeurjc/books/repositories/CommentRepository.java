@@ -1,11 +1,10 @@
 package es.codeurjc.books.repositories;
 
-import java.util.Collection;
-import java.util.Optional;
-
+import es.codeurjc.books.models.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import es.codeurjc.books.models.Comment;
+import java.util.Collection;
+import java.util.Optional;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 

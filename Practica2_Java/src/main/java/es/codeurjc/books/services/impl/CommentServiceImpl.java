@@ -1,11 +1,5 @@
 package es.codeurjc.books.services.impl;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
-
-import org.dozer.Mapper;
-import org.springframework.stereotype.Service;
-
 import es.codeurjc.books.dtos.requests.CommentRequestDto;
 import es.codeurjc.books.dtos.responses.CommentResponseDto;
 import es.codeurjc.books.dtos.responses.UserCommentResponseDto;
@@ -19,6 +13,11 @@ import es.codeurjc.books.repositories.BookRepository;
 import es.codeurjc.books.repositories.CommentRepository;
 import es.codeurjc.books.repositories.UserRepository;
 import es.codeurjc.books.services.CommentService;
+import org.dozer.Mapper;
+import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -36,6 +35,7 @@ public class CommentServiceImpl implements CommentService {
         this.userRepository = userRepository;
     }
 
+    @Override
     public CommentResponseDto addComment(long bookId, CommentRequestDto commentRequestDto) {
         Book book = this.bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
         User user = this.userRepository.findByNick(commentRequestDto.getUserNick()).orElseThrow(UserNotFoundException::new);
@@ -46,6 +46,7 @@ public class CommentServiceImpl implements CommentService {
         return this.mapper.map(comment, CommentResponseDto.class);
     }
 
+    @Override
     public CommentResponseDto deleteComment(long bookId, long commentId) {
         Comment comment = this.commentRepository.findByBookIdAndId(bookId, commentId)
                 .orElseThrow(CommentNotFoundException::new);
@@ -53,6 +54,7 @@ public class CommentServiceImpl implements CommentService {
         return this.mapper.map(comment, CommentResponseDto.class);
     }
 
+    @Override
     public Collection<UserCommentResponseDto> getComments(long userId) {
         return this.commentRepository.findByUserId(userId).stream()
                 .map(comment -> this.mapper.map(comment, UserCommentResponseDto.class))

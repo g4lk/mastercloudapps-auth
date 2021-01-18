@@ -1,10 +1,10 @@
 package es.codeurjc.books.services;
 
-import java.util.Collection;
-
 import es.codeurjc.books.dtos.requests.UpdateUserEmailRequestDto;
 import es.codeurjc.books.dtos.requests.UserRequestDto;
 import es.codeurjc.books.dtos.responses.UserResponseDto;
+
+import java.util.Collection;
 
 public interface UserService {
 
@@ -18,4 +18,5 @@ public interface UserService {
 
     UserResponseDto delete(long userId);
 
+    UserResponseDto findByNick(String nick);
 }
