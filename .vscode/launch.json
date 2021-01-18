@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<practica2.1.2-books>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "es.codeurjc.books.Application",
+            "projectName": "practica2.1.2-books",
+            "args": ""
+        }
+    ]
+}
