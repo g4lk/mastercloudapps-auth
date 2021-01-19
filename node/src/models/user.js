@@ -12,6 +12,10 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Nick is mandatory'],
         unique: true
     },
+    password: {
+        type: String,
+        required: [true, 'Password is mandatory'],
+    },
     email: {
         type: String,
         validate: {
@@ -32,6 +36,7 @@ function toResponse(document) {
         let response = document.toObject({ versionKey: false });
         response.id = response._id.toString();
         delete response._id;
+        delete response.password;
         return response;
     }
 }

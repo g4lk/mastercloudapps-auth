@@ -10,13 +10,13 @@ $ npm start
 ## API URL
 
 ```sh
-http://localhost:3000/api/v1/<resource>
+http://localhost:3443/api/v1/<resource>
 ```
 
 ## Uso de la API
 
 Se proporciona una colección Postman para interactuar con la API.
 
-La baseURL tiene que configurarse para localhost:3000
+La baseURL tiene que configurarse para localhost:3443
 
 La base de datos se inicializa con datos de ejemplo

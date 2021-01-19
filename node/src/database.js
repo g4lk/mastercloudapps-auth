@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const url = "mongodb://localhost:27017/booksDB";
+const url = "mongodb://localhost:27017/books";
 const User = require('./models/user.js').User;
 const Book = require('./models/book.js').Book;
-
+const bcrypt = require('bcryptjs')
 
 async function connect() {
 
@@ -33,13 +33,15 @@ async function init() {
     await new User({
         _id: new mongoose.Types.ObjectId("5fda3234e9e3fd53e3907bed"),
         nick: "user1",
-        email: "user1@email.es"
+        email: "user1@email.es",
+        password: bcrypt.hashSync("qwe123", 12),
     }).save();
 
     await new User({
         _id: new mongoose.Types.ObjectId("5fda3234e9e3fd53e3907bef"),
         nick: "user2",
-        email: "user2@email.es"
+        email: "user2@email.es",
+        password: bcrypt.hashSync("qwe123", 12),
     }).save();
 
     console.log('Populating database with books');
